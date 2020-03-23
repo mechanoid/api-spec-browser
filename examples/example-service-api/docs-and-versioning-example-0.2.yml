@@ -1,0 +1,43 @@
+openapi: "3.0.0"
+info:
+  title: Documentation and Versioning Example
+  version: 0.2
+paths:
+  /.well-known/home:
+    get:
+      tags:
+        - asb:home
+      summary: List available entrypoints of the application
+      responses:
+        '200':
+          description: |-
+            200 response
+          content:
+            application/hal+json:
+              examples:
+                content-with-links:
+                  value: {
+                      _links: {
+                        "self": {
+                            href: "http://some-example-domain/.well-known/home"
+                        }
+                      }
+                    }
+  /.well-known/info:
+    get:
+      tags:
+        - asb:info
+      summary: Show Service Information
+      responses:
+        '200':
+          description: |-
+            200 response
+          content:
+            application/hal+json:
+              examples:
+                service-info:
+                  value: {
+                    name: "some name",
+                    description: "some description",
+                    version: "1.2.3"
+                  }

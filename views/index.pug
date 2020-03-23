@@ -1,0 +1,20 @@
+doctype
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible" content="ie=edge")
+    title(Document)
+
+    link(rel="stylesheet" href="/assets/css/globals.css")
+    link(rel="stylesheet" href="/assets/css/asb-navigation.css")
+    script(src=assets.vendor.redoc.publicPath defer)
+  body
+    header
+      nav(is="asb-navigation")
+        h1 ApiSpecBrowser
+    main
+      if !currentService
+        p No Service Name provided
+      else
+        redoc(spec-url=spec && spec.href ? spec.href : '')
