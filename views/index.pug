@@ -12,7 +12,7 @@ html(lang="en")
   body
     header
       nav(is="asb-navigation")
-        h1 ApiSpecBrowser
+        h1= config.brand || "ApiSpecBrowser"
     main
       if !currentService
         p No Service Name provided
