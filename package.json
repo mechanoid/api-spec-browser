@@ -9,8 +9,12 @@
     "api-spec-browser": "./bin/api-spec-browser.js"
   },
   "scripts": {
+    "build:css": "sass client/css/main.sass dist/css/main.css",
+    "watch:css": "npm run build:css && npm run build:css -- --watch",
     "start": "ASB_LOG_LEVEL=info node -r dotenv/config ./bin/api-spec-browser.js --with-examples --config ./examples/example-config.js --cache",
-    "watch:start": "nodemon --ignore node_modules --exec \"npm run start\""
+    "build": "npm run build:css",
+    "watch:start": "nodemon --ignore node_modules --exec \"npm run start\"",
+    "watch": "run-p watch:*"
   },
   "description": "",
   "dependencies": {
@@ -32,6 +36,7 @@
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "sass": "^1.26.3"
   }
 }

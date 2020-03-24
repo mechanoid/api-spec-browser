@@ -13,9 +13,9 @@ export default async ({ pretty, examples, configPath, moduleRoot, cache } = {}) 
     app.use('/examples', exampleContentController)
   }
 
-  app.use('/assets', express.static('./assets'))
+  app.use('/client', express.static('./dist'))
 
-  app.get('/', specRendererController({ pretty, cache, config }))
-
+  app.get('/', specRendererController({ pretty, cache, config, mountpath: app.mountpath }))
+  console.log('MOUNTPATH', app.mountpath)
   return app
 }

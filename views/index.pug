@@ -6,13 +6,19 @@ html(lang="en")
     meta(http-equiv="X-UA-Compatible" content="ie=edge")
     title(Document)
 
-    link(rel="stylesheet" href="/assets/css/globals.css")
-    link(rel="stylesheet" href="/assets/css/asb-navigation.css")
+    link(rel="stylesheet" href="/client/css/main.css")
+
     script(src=assets.vendor.redoc.publicPath defer)
   body
     header
       nav(is="asb-navigation")
-        h1= config.brand || "ApiSpecBrowser"
+        a.home(href=mountpath)= config.brand || "ApiSpecBrowser"
+
+        ul.nav-items.services
+          if services
+            for service in services
+              li(class=(service === serviceName ? 'active' : ''))
+                a(href="")= service
     main
       if !currentService
         p No Service Name provided
