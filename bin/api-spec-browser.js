@@ -60,6 +60,7 @@ const examples = args['--with-examples'] || process.env.ASB_ENABLE_EXAMPLES
 const configPath = args['--config'] || process.env.ASB_CONFIG_PATH || './Apispecbrowserfile.js'
 
 apiSpecBrowser({ pretty, examples, configPath, moduleRoot, cache })
-  .then(app => app.listen(port, _ => {
-    logger.info(`started server at ${port}`)
-  }))
+  .then(app => {
+    const server = app.listen(port, _ => {
+    logger.info(`started server at ${server.address().port}`)
+  })})
