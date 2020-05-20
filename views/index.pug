@@ -8,17 +8,20 @@ html(lang="en")
 
     link(rel="stylesheet" href="/client/css/main.css")
 
+    script(src="/assets/js/asb-navigation.js" defer)
     script(src=assets.vendor.redoc.publicPath defer)
   body
     header
       nav(is="asb-navigation")
         a.home(href=mountpath)= config.brand || "ApiSpecBrowser"
 
-        ul.nav-items.services
-          if services
-            for service in services
-              li(class=(service === serviceName ? 'active' : ''))
-                a(href="")= service
+        .list-wrapper
+          button(aria-expanded="false")= serviceName
+          ul.nav-items.services(hidden)
+            if services
+              for service in services
+                li
+                  a(href=`/?service-name=${service}`)= service
     main
       if !currentService
         p No Service Name provided
