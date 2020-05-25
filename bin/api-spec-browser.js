@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url'
 import apiSpecBrowser from '../index.js'
 import logger from '../lib/logger.js'
 
-const __dirname = dirname(fileURLToPath(import.meta.url)); // NOTE: Stage 3 - Syntax, therefore unsupported by eslint
+const __dirname = dirname(fileURLToPath(import.meta.url)) // NOTE: Stage 3 - Syntax, therefore unsupported by eslint
 const moduleRoot = resolve(__dirname, '..')
 
 const isProduction = _ => process.env.NODE_ENV === 'production'
@@ -62,5 +62,6 @@ const configPath = args['--config'] || process.env.ASB_CONFIG_PATH || './Apispec
 apiSpecBrowser({ pretty, examples, configPath, moduleRoot, cache })
   .then(app => {
     const server = app.listen(port, _ => {
-    logger.info(`started server at ${server.address().port}`)
-  })})
+      logger.info(`started server at ${server.address().port}`)
+    })
+  })
