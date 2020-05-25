@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url'
 import apiSpecBrowser from '../index.js'
 import logger from '../lib/logger.js'
 
-const __dirname = dirname(fileURLToPath(import.meta.url)) // NOTE: Stage 3 - Syntax, therefore unsupported by eslint
+const __dirname = dirname(fileURLToPath(import.meta.url))
 const moduleRoot = resolve(__dirname, '..')
 
 const isProduction = _ => process.env.NODE_ENV === 'production'

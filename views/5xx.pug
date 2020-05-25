@@ -1,0 +1,17 @@
+doctype
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible" content="ie=edge")
+    title(Document)
+
+    link(rel="stylesheet" href="/client/css/main.css")
+
+    script(src="/client/js/asb-navigation.js" defer)
+    script(src=assets.vendor.redoc.publicPath defer)
+  body.error
+    main
+      h2 Server Error
+      if error
+        = error.message
