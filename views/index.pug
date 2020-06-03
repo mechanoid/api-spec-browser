@@ -18,8 +18,8 @@ html(lang="en")
         .list-wrapper
           button(aria-expanded="false")= serviceName
           ul.nav-items.services(hidden)
-            if services
-              for service in services
+            if availableServices
+              for service in availableServices
                 li
                   a(href=`/?service-name=${service}`)= service
     main
