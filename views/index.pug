@@ -24,6 +24,6 @@ html(lang="en")
                   a(href=`/?service-name=${service}`)= service
     main
       if !currentService
-        p No Service Name provided
+        p= error ? error.message : "No Service Name provided"
       else
         redoc(spec-url=spec && spec.href ? spec.href : '')
