@@ -11,15 +11,22 @@ export const capture = fn => (req, res, next) =>
 
 export default async ({ pretty, examples, configPath, moduleRoot, cache } = {}) => {
   const app = baseApp({ moduleRoot })
-  const config = (await import(resolve(process.cwd(), configPath))).default
+
+  Object.assign(app.locals, { pretty, mountpath: app.mountpath })
+
+  const configDefaults = { services: [] }
+  const loadedConfig = (await import(resolve(process.cwd(), configPath))).default
+  const config = Object.assign({}, configDefaults, loadedConfig)
+
   logger.info('CONFIG', config)
+
   if (examples) {
     app.use('/examples', exampleContentController)
   }
 
   app.use('/client', express.static(resolve(moduleRoot, 'dist')))
 
-  app.get('/', capture(specRendererController({ pretty, cache, config, mountpath: app.mountpath })))
+  app.get('/', capture(specRendererController({ config })))
   logger.info('MOUNTPATH', app.mountpath)
 
   app.use((error, req, res, next) => {

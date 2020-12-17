@@ -19,11 +19,11 @@ html(lang="en")
           button(aria-expanded="false")= serviceName
           ul.nav-items.services(hidden)
             if availableServices
-              for service in availableServices
+              for service in configuredServices
                 li
                   a(href=`/?service-name=${service}`)= service
     main
-      if !currentService
+      if !spec
         p= error ? error.message : "No Service Name provided"
       else
         redoc(spec-url=spec && spec.href ? spec.href : '')
