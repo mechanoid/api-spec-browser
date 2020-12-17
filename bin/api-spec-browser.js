@@ -72,7 +72,7 @@ if (cookie) {
 apiSpecBrowser({ pretty, examples, configPath, moduleRoot, cache, cookie })
   .then(app => {
     const server = app.listen(port, _ => {
-      logger.info(`started server at ${server.address().port}`)
+      logger.info(`started server at http://localhost:${server.address().port}`)
     })
   })
   .catch(e => {
