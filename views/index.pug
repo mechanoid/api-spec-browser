@@ -8,22 +8,42 @@ html(lang="en")
 
     link(rel="stylesheet" href="/client/css/main.css")
 
-    script(src="/client/js/asb-navigation.js" defer)
     script(src=assets.vendor.redoc.publicPath defer)
+    script(src="/client/js/asb-select-submit.js" defer)
   body
     header
       nav(is="asb-navigation")
-        a.home(href=mountpath)= config.brand || "ApiSpecBrowser"
+        a.home(href=appLink())= config.brand || "ApiSpecBrowser"
 
         .list-wrapper
-          button(aria-expanded="false")= serviceName
-          ul.nav-items.services(hidden)
-            if availableServices
-              for service in configuredServices
-                li
-                  a(href=`/?service-name=${service}`)= service
+          asb-select-submit
+            form(action=appLink())
+              label(for="spec-select") API Spec
+              .nice-select
+                select(id="spec-select" name="service-name")
+                  if configuredServices
+                    for service in configuredServices
+                      option(value=service selected=(service === serviceName))= service
+                span.focus
+              input(type="submit" value="🔎")
+
+          if serviceName && apiVersions
+            asb-select-submit
+              form(action=appLink())
+                input(type="hidden" name="service-name" value=serviceName)
+
+                label(for="version-select") Version Select
+                .nice-select
+                  select(id="version-select" name="display-version")
+                    for v in apiVersions
+                      - const version = stringFormat(v)
+                      option(value=v selected=(version === displayVersion))= (currentAPIVersion === version ? `${version}*` : version)
+                  span.focus
+                input(type="submit" value="🔎")
+                = `* Service Version of ${serviceName} in this environment is ${currentActiveVersion}`
+
     main
       if !spec
-        p= error ? error.message : "No Service Name provided"
+        p.error= error ? error.message : "No Service Name provided"
       else
         redoc(spec-url=spec && spec.href ? spec.href : '')

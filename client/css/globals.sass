@@ -6,11 +6,21 @@
 
 *
   font-family: "system"
+
+*,
+*::before,
+*::after
   box-sizing: border-box
 
 body
   margin: 0
   padding: 0
 
-[hidden]
+[hidden],
+.hidden
   display: none !important
+
+.error
+  padding: 1rem
+  color: red
+  font-size: 1.2rem

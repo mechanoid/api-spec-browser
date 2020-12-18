@@ -1,5 +1,5 @@
 import express from 'express'
-import { resolve } from 'path'
+import { resolve, join } from 'path'
 
 import logger from './lib/logger.js'
 import { baseApp } from './lib/app.js'
@@ -9,10 +9,12 @@ import specRendererController from './lib/controllers/spec-renderer-controller.j
 export const capture = fn => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next)
 
+const appLink = mountpath => (path = '.') => join(mountpath, path)
+
 export default async ({ pretty, examples, configPath, moduleRoot, cache } = {}) => {
   const app = baseApp({ moduleRoot })
 
-  Object.assign(app.locals, { pretty, mountpath: app.mountpath })
+  Object.assign(app.locals, { pretty, mountpath: app.mountpath, appLink: appLink(app.mountpath) })
 
   const configDefaults = { services: [] }
   const loadedConfig = (await import(resolve(process.cwd(), configPath))).default
