@@ -6,10 +6,10 @@ html(lang="en")
     meta(http-equiv="X-UA-Compatible" content="ie=edge")
     title(Document)
 
-    link(rel="stylesheet" href="/client/css/main.css")
+    link(rel="stylesheet" href=appLink('/client/css/main.css'))
 
-    script(src=assets.vendor.redoc.publicPath defer)
-    script(src="/client/js/asb-select-submit.js" defer)
+    script(src=appLink(assets.vendor.redoc.publicPath) defer)
+    script(src=appLink('client/js/asb-select-submit.js') defer)
   body
     header
       nav(is="asb-navigation")

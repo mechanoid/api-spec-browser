@@ -1,15 +1,10 @@
 #!/usr/bin/env node
 import arg from 'arg'
-import { dirname, resolve } from 'path'
-import { fileURLToPath } from 'url'
 import dotenv from 'dotenv'
 import apiSpecBrowser from '../index.js'
 import logger from '../lib/logger.js'
 
 dotenv.config()
-
-const __dirname = dirname(fileURLToPath(import.meta.url))
-const moduleRoot = resolve(__dirname, '..')
 
 const isProduction = _ => process.env.NODE_ENV === 'production'
 
@@ -34,7 +29,6 @@ const cliOptions = {
   '--pretty': { type: Boolean, description: 'enables HTML pretty printing' },
   '--with-examples': { type: Boolean, description: 'also mounts the examples in development mode. Not available in production' },
   '--config': { type: String, description: 'provide a content config to the spec browser.' },
-  '--cache': { type: Boolean, description: 'enables caching of the hypermedia documents' },
   '--cookie': { type: String, description: 'a cookie to send while fetching the specs' }
 }
 
@@ -42,7 +36,6 @@ const argAliases = {
   '-v': '--verbose',
   '-p': '--port',
   '-y': '--pretty',
-  '-c': '--config',
   '-k': '--cookie'
 }
 
@@ -59,7 +52,6 @@ if (args['--help']) {
 }
 
 const pretty = args['--pretty'] || !isProduction()
-const cache = args['--cache'] || isProduction()
 const port = args['--port'] || process.env.PORT
 const examples = args['--with-examples'] || process.env.ASB_ENABLE_EXAMPLES
 const configPath = args['--config'] || process.env.ASB_CONFIG_PATH || './Apispecbrowserfile.js'
@@ -69,7 +61,7 @@ if (cookie) {
   process.env.ASB_REQUEST_COOKIE = cookie
 }
 
-apiSpecBrowser({ pretty, examples, configPath, moduleRoot, cache, cookie })
+apiSpecBrowser({ pretty, examples, configPath, cookie })
   .then(app => {
     const server = app.listen(port, _ => {
       logger.info(`started server at http://localhost:${server.address().port}`)
