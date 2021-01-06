@@ -8,7 +8,6 @@ html(lang="en")
 
     link(rel="stylesheet" href=appLink('/client/css/main.css'))
 
-    script(src=appLink(assets.vendor.redoc.publicPath) defer)
     script(src=appLink('client/js/asb-select-submit.js') defer)
   body
     header
@@ -46,4 +45,8 @@ html(lang="en")
       if !spec
         p.error= error ? error.message : "No Service Name provided"
       else
-        redoc(spec-url=spec && spec.href ? spec.href : '')
+        redoc
+        script(src=appLink(assets.vendor.redoc.publicPath))
+        script.
+          const spec = !{JSON.stringify(spec)};
+          Redoc.init(spec)
