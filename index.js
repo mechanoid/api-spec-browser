@@ -14,13 +14,6 @@ export const capture = fn => (req, res, next) =>
 
 const appLink = app => (path = '.') => join(app.mountpath, path)
 
-const provideCookieToClient = (req, res, next) => {
-  if (process.env.ASB_REQUEST_COOKIE_NAME && process.env.ASB_REQUEST_COOKIE_VALUE) {
-    res.cookie(process.env.ASB_REQUEST_COOKIE_NAME, process.env.ASB_REQUEST_COOKIE_VALUE, { domain: process.env.ASB_REQUEST_COOKIE_DOMAIN })
-  }
-  next()
-}
-
 export default async ({ pretty, examples, configPath } = {}) => {
   const app = baseApp({ moduleRoot: __dirname })
 
@@ -38,7 +31,7 @@ export default async ({ pretty, examples, configPath } = {}) => {
 
   app.use('/client', express.static(resolve(__dirname, 'dist')))
 
-  app.get('/', provideCookieToClient, capture(specRendererController({ config })))
+  app.get('/', capture(specRendererController({ config })))
 
   app.use((error, req, res, next) => {
     logger.error(error)
