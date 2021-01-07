@@ -16,7 +16,8 @@
     "views/*",
     "lib/*",
     "index.js",
-    "LICENSE"
+    "LICENSE",
+    "node_modules/redoc/bundles/redoc.standalone.js"
   ],
   "scripts": {
     "build:css": "sass client/css/main.sass dist/css/main.css",
