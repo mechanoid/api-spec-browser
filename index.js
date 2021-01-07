@@ -29,8 +29,6 @@ export default async ({ pretty, examples, configPath } = {}) => {
     app.use('/examples', exampleContentController)
   }
 
-  app.use('/client', express.static(resolve(__dirname, 'dist')))
-
   app.get('/', capture(specRendererController({ config })))
 
   app.use((error, req, res, next) => {
