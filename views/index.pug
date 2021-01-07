@@ -6,7 +6,7 @@ html(lang="en")
     meta(http-equiv="X-UA-Compatible" content="ie=edge")
     title(Document)
 
-    link(rel="stylesheet" href=appLink('/client/css/main.css'))
+    link(rel="stylesheet" href=appLink('client/css/main.css'))
 
     script(src=appLink('client/js/asb-select-submit.js') defer)
   body
@@ -46,6 +46,8 @@ html(lang="en")
         p.error= error ? error.message : "No Service Name provided"
       else
         redoc
+
+        script(src=appLink('client/js/redoc/bundles/redoc.standalone.js'))
         script(src=appLink(assets.vendor.redoc.publicPath))
         script.
           const spec = !{JSON.stringify(spec)};
