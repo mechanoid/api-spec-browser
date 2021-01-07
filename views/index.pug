@@ -48,7 +48,6 @@ html(lang="en")
         redoc
 
         script(src=appLink('client/js/redoc/bundles/redoc.standalone.js'))
-        script(src=appLink(assets.vendor.redoc.publicPath))
         script.
           const spec = !{JSON.stringify(spec)};
           Redoc.init(spec)
