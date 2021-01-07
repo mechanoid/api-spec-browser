@@ -9,13 +9,23 @@
   "bin": {
     "api-spec-browser": "bin/api-spec-browser.js"
   },
+  "files": [
+    "dist/*",
+    "bin/*",
+    "client/js/*",
+    "views/*",
+    "lib/*",
+    "index.js",
+    "LICENSE"
+  ],
   "scripts": {
     "build:css": "sass client/css/main.sass dist/css/main.css",
     "watch:css": "npm run build:css && npm run build:css -- --watch",
     "start": "ASB_LOG_LEVEL=info node ./bin/api-spec-browser.js --with-examples --config ./examples/example-config.js",
     "build": "npm run build:css",
     "watch:start": "nodemon --ignore node_modules --exec \"npm run start\"",
-    "watch": "run-p watch:*"
+    "watch": "run-p watch:*",
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "arg": "^4.1.3",
