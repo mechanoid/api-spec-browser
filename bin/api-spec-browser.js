@@ -2,9 +2,10 @@
 import arg from 'arg'
 import dotenv from 'dotenv'
 import apiSpecBrowser from '../index.js'
-import logger from '../lib/logger.js'
+import logger, { init as loggerInit } from '../lib/logger.js'
 
 dotenv.config()
+loggerInit(process.env.ASB_LOG_LEVEL)
 
 const isProduction = _ => process.env.NODE_ENV === 'production'
 
