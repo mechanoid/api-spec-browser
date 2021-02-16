@@ -1,7 +1,8 @@
 import { resolve, join, dirname } from 'path'
 
 import { fileURLToPath } from 'url'
-import logger from './lib/logger.js'
+import logger, { init as loggerInit } from './lib/logger.js'
+
 import { baseApp } from './lib/app.js'
 import exampleContentController from './lib/controllers/example-content-controller.js'
 import specRendererController from './lib/controllers/spec-renderer-controller.js'
@@ -13,7 +14,8 @@ export const capture = fn => (req, res, next) =>
 
 const appLink = app => (path = '.') => join(app.mountpath, path)
 
-export default async ({ pretty, examples, configPath } = {}) => {
+export default async ({ pretty, examples, configPath, logLevel = 'error' } = {}) => {
+  loggerInit(logLevel)
   const app = baseApp({ moduleRoot: __dirname })
 
   Object.assign(app.locals, { pretty, mountpath: app.mountpath, appLink: appLink(app) })

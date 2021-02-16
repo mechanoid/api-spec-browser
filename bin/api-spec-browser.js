@@ -2,10 +2,9 @@
 import arg from 'arg'
 import dotenv from 'dotenv'
 import apiSpecBrowser from '../index.js'
-import logger, { init as loggerInit } from '../lib/logger.js'
+import logger from '../lib/logger.js'
 
 dotenv.config()
-loggerInit(process.env.ASB_LOG_LEVEL)
 
 const isProduction = _ => process.env.NODE_ENV === 'production'
 
@@ -30,7 +29,8 @@ const cliOptions = {
   '--pretty': { type: Boolean, description: 'enables HTML pretty printing' },
   '--with-examples': { type: Boolean, description: 'also mounts the examples in development mode. Not available in production' },
   '--config': { type: String, description: 'provide a content config to the spec browser.' },
-  '--cookie': { type: String, description: 'a cookie to send while fetching the specs' }
+  '--cookie': { type: String, description: 'a cookie to send while fetching the specs' },
+  '--log-level': { type: String, description: 'desired log level' }
 }
 
 const argAliases = {
@@ -57,12 +57,13 @@ const port = args['--port'] || process.env.PORT
 const examples = args['--with-examples'] || process.env.ASB_ENABLE_EXAMPLES
 const configPath = args['--config'] || process.env.ASB_CONFIG_PATH || './Apispecbrowserfile.js'
 const cookie = args['--cookie']
+const logLevel = args['--log-level'] || process.env.ASB_LOG_LEVEL
 
 if (cookie) {
   process.env.ASB_REQUEST_COOKIE = cookie
 }
 
-apiSpecBrowser({ pretty, examples, configPath, cookie })
+apiSpecBrowser({ pretty, examples, configPath, cookie, logLevel })
   .then(app => {
     const server = app.listen(port, _ => {
       logger.info(`started server at http://localhost:${server.address().port}`)
