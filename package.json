@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "arg": "^4.1.3",
+    "cache-control-parser": "^1.0.8",
     "core-js": "^3.8.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -40,6 +41,7 @@
     "log4js": "^6.3.0",
     "mobx": "^6.0.4",
     "morgan": "^1.10.0",
+    "node-cache": "^5.1.2",
     "node-fetch": "^2.6.0",
     "pug": "^3.0.0",
     "react": "^16.8.4",
