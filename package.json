@@ -46,7 +46,7 @@
     "pug": "^3.0.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "redoc": "^2.0.0-rc.45",
+    "redoc": "^2.0.0-rc.48",
     "semver": "^7.3.2",
     "styled-components": "^5.2.1"
   },
